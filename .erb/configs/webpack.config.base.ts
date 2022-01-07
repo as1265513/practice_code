@@ -5,6 +5,7 @@
 import webpack from 'webpack';
 import webpackPaths from './webpack.paths';
 import { dependencies as externals } from '../../release/app/package.json';
+import Dotenv from 'dotenv-webpack'
 
 export default {
   externals: [...Object.keys(externals || {})],
@@ -19,7 +20,7 @@ export default {
         use: {
           loader: 'ts-loader',
         },
-      },
+      }
     ],
   },
 
@@ -43,5 +44,8 @@ export default {
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
     }),
+    new Dotenv({
+      path:'../../firestore.env'
+    })
   ],
 };
